@@ -26,10 +26,14 @@ for i, t in enumerate(result['tracks']['items']):
     print(" ", i+1, t['artists'][0]['name'], "-", t['name'], "(", t['album']['name'], ")")
 
 print("\n\nChoosing random track...\n\n")
-rand = randint(0, num_results)
+rand = randint(0, num_results-1)
 rand_track = result['tracks']['items'][rand]
+while rand_track['explicit']:
+    rand = randint(0, num_results-1)
+    rand_track = result['tracks']['items'][rand]
 rand_track_uri = [rand_track['uri']]
 print(rand_track['artists'][0]['name'], '-', rand_track['name'])
+print("This track is explicit: ", rand_track['explicit'])
 
 print("Adding to Spotipy collab playlist...")
 pl_id = '5akLeMXmd3bMgmGdwunZ5e'
